@@ -7,7 +7,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-     @yield('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    @yield('styles')
     <title>Agence Location</title>
   </head>
   <body>
@@ -16,7 +17,10 @@
     <div class="header h-50 bg-info rounded shadow-sm">
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link text-white" href="#">Accueil</a>
+          <a class="nav-link text-white" href="{{URL::to('/')}}">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{route('admins.index')}}">users</a>
         </li>
         @auth
         <li class="nav-item">
@@ -26,8 +30,8 @@
         </li>
         @if(auth()->user()->isAdmin())
         <li class="nav-item">
-          <a class="nav-link text-white" href="#">
-              Admin
+        <a class="nav-link text-white" href="{{route('admins.index')}}">
+             Commande
             </a>
           </li>
           @endif
@@ -38,6 +42,7 @@
           </form>
         </li>
         @else
+       
         <li class="nav-item">
           <a class="nav-link text-white" href="{{route('users.registre')}}">Inscription</a>
         </li>

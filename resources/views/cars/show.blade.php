@@ -8,7 +8,8 @@
                   Recherche
               </h3>
               <div class="card-body">
-                  <form action="#" method="post">
+              <form action="{{route('cars.index')}}" method="post">
+                @csrf
                       <div class="form-group">
                           <label for="search">Recherche</label>
                           <input type="text" class="form-control" id="search"  placeholder="Enter Recherche">

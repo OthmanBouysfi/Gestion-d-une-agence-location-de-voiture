@@ -38,10 +38,10 @@ class CommandController extends Controller
     public function store(Request $request)
     {
         
-       $this->validate($request, [
-          'car_id' => 'required',
-          'dateL' => 'required',
-          'dateR' => 'required',
+      $this->validate($request, [
+         'car_id' => 'required',
+        'dateL' => 'required',
+         'dateR' => 'required',
         ]);
         $car = Car::findOrFail($request->car_id);
         $dateLocation = new Datetime($request->dateL);
@@ -59,7 +59,7 @@ class CommandController extends Controller
         $car->update([
             'dispo'=>0
         ]);
-        return redirect()->route('users.profile',auth()->user()->id)->with(['success'=>'Commande Ajouté !']);
+        return redirect()->route('cars.index',auth()->user()->id)->with(['success'=>'Commande Ajouté !']);
         }
 
     /**
@@ -106,5 +106,13 @@ class CommandController extends Controller
     public function destroy(Command $command)
     {
         //
+    }
+    public function deleteUserCommands($commandId,$carId){
+        $command = Command::findOrFail($commandId);
+      if($command->car_id == $carId){
+          $command->delete();
+          return redirect()->route('users.profile',auth()->user()->id)->with(['success'=>'Commande supprimé']);
+      }
+
     }
 }

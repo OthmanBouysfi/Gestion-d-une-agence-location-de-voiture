@@ -27,6 +27,7 @@
                     <div class="form-group">
                         <label for="dateL">Date Début </label>
                         <input type="date" class="form-control" id="dateL" name="dateL" placeholder="Entrez Votre dateL ">
+                        
                     </div>
                     <div class="form-group">
                         <label for="dateR">Date Fin </label>

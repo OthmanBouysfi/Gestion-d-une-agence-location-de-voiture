@@ -21,8 +21,9 @@
                 <tr>
                     <th>Marque</th>
                     <th>type</th>
-                    <th>Date début</th>
-                    <th>Date fin</th>
+                    <th>Prix Journée</th>
+                    <th>Date Début</th>
+                    <th>Date Fin</th>
                     <th>Prix TTC</th>
                     <th>Action</th>
                 </tr>
@@ -36,7 +37,14 @@
                 <td>{{$command->dateL}}</td>
                 <td>{{$command->dateR}}</td>
                 <td>{{$command->prixTTC}}</td>
-                <td></td>
+                <td>
+                    <form action="{{route('commands.delete',[$command->id,$command->car_id])}}" method="POST">
+                        @csrf   
+                        {{method_field('delete')}}
+                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>        
+
+                    </form>  
+                </td>
                </tr>
                 @endforeach
             </tbody>

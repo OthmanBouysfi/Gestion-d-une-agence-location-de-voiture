@@ -49,7 +49,29 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'marque' => 'required',
+            'model' => 'required',
+            'type' => 'required',
+            'prixJ' => 'required',
+            'dispo' => 'required',
+            'image' => 'required'
+        ]);
+
+            $file = $request->file('image');
+            $name = $file->getClientOriginalName();
+            $file->move(public_path('images'),$name);
+
+        Car::create([
+            'marque' => $request->marque,
+            'model' => $request->model,
+            'type' => $request->type,
+            'prixJ' => $request->prixJ,
+            'dispo' => $request->dispo,
+            'image' => '/images/' .$name
+
+        ]);
+        return redirect()->route('admins.index')->withSuccess('Voiture ajoutée');
     }
 
     /**
@@ -71,7 +93,7 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-        //
+        return view('cars.edit')->withCar($car);
     }
 
     /**
@@ -83,7 +105,30 @@ class CarController extends Controller
      */
     public function update(Request $request, Car $car)
     {
-        //
+        $this->validate($request,[
+            'marque' => 'required',
+            'model' => 'required',
+            'type' => 'required',
+            'prixJ' => 'required',
+            'dispo' => 'required',
+        ]);
+        $image = $car->image;
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            $name = $file->getClientOriginalName();
+            $file->move(public_path('images'),$name);
+            $image = '/images/' . $name;
+        }
+        $car->update([
+            'marque' => $request->marque,
+            'model' => $request->model,
+            'type' => $request->type,
+            'prixJ' => $request->prixJ,
+            'dispo' => $request->dispo,
+            'image' => $image
+
+        ]);
+        return redirect()->route('admins.index')->withSuccess('Voiture Modifié');
     }
 
     /**
@@ -94,6 +139,8 @@ class CarController extends Controller
      */
     public function destroy(Car $car)
     {
-        //
+        $car->delete();
+        return redirect()->route('admins.index')->withSuccess('Voiture Supprimé');
+
     }
 }

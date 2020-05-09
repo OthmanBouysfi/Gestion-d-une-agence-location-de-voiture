@@ -23,3 +23,7 @@ Route::resource('/commands','CommandController');
 Route::get('/commands/{id}/create','CommandController@create')->name('command.create');
 Route::get('/user/{id}/profile','UsersController@show')->name('users.profile');
 Route::post('/cars','CarController@index')->name('cars.index');
+Route::post('/add/car','CarController@store')->name('cars.store');
+
+Route::get('/admin','AdminsController@index')->name('admins.index');
+Route::delete('/commands/{commandId}/{carId}/delete','CommandController@deleteUserCommands')->name('commands.delete');
